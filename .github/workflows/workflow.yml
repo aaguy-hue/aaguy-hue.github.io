@@ -1,5 +1,23 @@
 name: directory-listing
-on: [push]
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+# set permissions on GITHUB_TOKEN
+permissions:
+  contents: read
+  pages: write      # to deploy to Pages
+  id-token: write   # to verify the deployment originates from an appropriate source
+
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 
 jobs:
   pages-directory-listing:
@@ -7,7 +25,7 @@ jobs:
     name: Directory Listings Index
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main    #checkout different branch
 
@@ -17,15 +35,16 @@ jobs:
           FOLDER: data/projects      #directory to generate index
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'data/projects'      # upload generated folder
   
   deploy:
     needs: pages-directory-listing
-    permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+    # permissions:
+    #   contents: read
+    #   pages: write      # to deploy to Pages
+    #   id-token: write   # to verify the deployment originates from an appropriate source
 
     # Deploy to the github-pages environment
     environment:
@@ -34,7 +53,7 @@ jobs:
 
     # Specify runner + deployment step
     runs-on: ubuntu-latest
-    steps:
+    steps:      
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
