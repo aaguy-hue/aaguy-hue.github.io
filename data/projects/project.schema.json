@@ -1,0 +1,43 @@
+{
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://aaguy-hue.github.io/projects/project.schema.json",
+      "title": "Project",
+      "description": "One of Aadit's projects",
+      "type": "object",
+      "properties": {
+            "projectName": {
+                  "description": "The name of the project",
+                  "type": "string"
+            },
+            "projectDate": {
+                  "description": "Date of release of latest version of project",
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+            },
+            "projectStatus": {
+                  "description": "Whether the project is complete, in progress, or abandoned",
+                  "type": "string",
+                  "pattern": "(complete|in progress|abandoned)"
+            },
+            "projectTags": {
+                  "description": "Tags for the project",
+                  "type": "array",
+                  "items": {
+                        "type": "string"
+                  },
+                  "uniqueItems": true
+            },
+            "projectLink": {
+                  "description": "Link to the project",
+                  "type": "string",
+                  "format": "uri"
+            },
+            "coolness": {
+                  "description": "Bigger number means cooler project",
+                  "type": "number",
+                  "exclusiveMinimum": 0
+            }
+      },
+      "required": [ "projectName", "projectDate", "projectStatus", "projectTags", "coolness" ]
+}

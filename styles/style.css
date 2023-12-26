@@ -1,0 +1,67 @@
+html {
+    --color-primary: #161517;
+    --color-secondary: #6b676e;
+    --color-bg: #ffffff;
+    --color-bg2: #dadace; /* alternate bg color, used in some backgrounds */
+    --color-btn: #dcd6d6;
+    --color-btnhover: #ada8a8;
+    --color-btnclick: #888888;
+}
+/* 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+} */
+
+
+nav.nav-top {
+    position: sticky;
+    margin: none;
+}
+
+
+.refresh-btn {
+    height: 60%;
+    border-radius: 25%;
+    cursor: pointer;
+    background: var(--color-btn);
+    border: none;
+}
+
+.refresh-btn:hover {
+    background: var(--color-btnhover);
+}
+.refresh-btn:active {
+    background: var(--color-btnclick);
+}
+
+.refresh-img {
+    height: 60%;
+}
+
+
+
+section.list-window {
+    display: block;
+    justify-content: space-between;
+    border-radius: 10px; /* Rounded corners */
+    border: .5ch solid var(--color-primary);
+    width: 30vw;
+    height: 40vh;
+    overflow: auto;
+}
+
+section.list-window header {
+    height: 20%;
+}
+
+article.listing {
+    background-color: var(--color-bg2); /* Background color */
+    padding: 20px; /* Add some padding for content */
+    border: .2ch solid var(--color-secondary);
+}
+
+article.listing .project-title {
+
+}
