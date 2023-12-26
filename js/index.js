@@ -1,4 +1,5 @@
 const ROOT_URL = "https://aaguy-hue.github.io"
+const PROJECT_LIST_SECTION = document.querySelector(".project-list");
 
 function makeHttpObject() {
     try {return new XMLHttpRequest();}
@@ -29,7 +30,7 @@ function getProjects(callback) {
 
         let links = [];
         for (let i = 0; i < rows.length; i++) {
-            let projLink = rows[i].querySelector("a").href;
+            let projLink = ROOT_URL + "/data/projects/" + rows[i].querySelector("a").getAttribute("href");
             if (!projLink.includes("schema")) { links.push(projLink); };
         };
         
@@ -45,7 +46,9 @@ function getProjects(callback) {
             }
 
             sendGet(links[index], function(projData) {
-                projectData.push(JSON.parse(projData));
+                let huh = JSON.parse(projData);
+                huh.projectPage = links[index];
+                projectData.push(huh);
                 fetchProjectData(index + 1); // Move to the next project
             });
         }
@@ -57,7 +60,24 @@ function getProjects(callback) {
 
 function reloadProjects() {
     getProjects(function (projects) {
-        projects.sort(function (a,b) { return a.coolness - b.coolness; });
-        console.log(projects);
+        PROJECT_LIST_SECTION.innerHTML = "";
+        
+        // sort from greatest coolness to least
+        projects.sort(function (a,b) { return b.coolness - a.coolness; });
+        
+        for (let i = 0; i < projects.length; i++) {
+            let articleElement = document.createElement('article');
+            articleElement.classList.add('project-listing', 'listing');
+
+            let linkElement = document.createElement('a');
+            linkElement.classList.add('project-name');
+            linkElement.textContent = projects[i].projectName;
+            linkElement.setAttribute('href', projects[i].projectPage);
+
+            articleElement.appendChild(linkElement);
+            PROJECT_LIST_SECTION.appendChild(articleElement);
+        };
     });
 }
+
+reloadProjects();

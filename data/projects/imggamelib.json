@@ -1,5 +1,5 @@
 {
-    "projectName": "8-Bit Game Bot",
+    "projectName": "ImgGameLib",
     "projectDate": "2022-04-27",
     "projectStatus": "abandoned",
     "projectTags": [
@@ -8,6 +8,6 @@
         "game",
         "game engine"
     ],
-    "projectLink": "https://github.com/aaguy-hue/8-Bit",
+    "projectLink": "https://github.com/aaguy-hue/ImgGameLib",
     "coolness": 80
 }
