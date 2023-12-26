@@ -9,8 +9,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          ref: dummy-data    #checkout different branch
-
+          ref: main
+      
       - name: Generate Directory Listings
         uses: jayanta525/github-pages-directory-listing@v4.0.0
         with:
